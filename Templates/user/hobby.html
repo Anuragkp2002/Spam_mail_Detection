@@ -1,0 +1,57 @@
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#hobby').change(function(){
+                    var hid=$('#hobby').val();
+                    $.ajax({
+                    url:"{% url 'factor' %}",
+                    data:{'hby':hid},
+                    success:function(data){
+                        $('#factor').html(data)
+                        }   
+                    })
+                })
+            })
+        </script>
+        <form method="post" action="{% url 'customerhobbyAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Hobby</th>
+                <td>
+                    <select name="hobby" id="hobby">
+                        <option value="">---select---</option>
+                        {% for v in hb %}
+                        <option value="{{v.id}}">{{v.Hobbyname}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Factor</th>
+                <td>
+                    <select name="factor" id="factor">
+                        <option value="">---select---</option>
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Add"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+    </script>
+    {% endfor %}
+
+{% endif %}

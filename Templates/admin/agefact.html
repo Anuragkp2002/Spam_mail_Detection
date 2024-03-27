@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+    </head>
+    <body style="background: url('/static/00585a3568a0a7d.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="container" style="padding-top: 166px; padding-left: 370px;">
+        <form  method="post" action="{% url 'agefactAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Minimum age</th>
+                <td><input type="text" name="minimum" class="form-control"></td>
+            </tr>
+            <tr>
+                <th>Maximum age</th>
+                <td><input type="text" name="maximum" class="form-control"></td>
+            </tr>
+            <tr>
+                <th>Factor Name</th>
+                <td><input type="text" name="factor" class="form-control"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td style="padding-top: 10px; padding-left: 69px;"><input type="submit" value="Add" class="btn btn-outline-danger">
+            </tr>
+        </table>
+        </form>
+        </div>
+    </body>
+</html>
+{% if messages %}   
+    {% for msg in messages %}
+        <script>
+            alert('{{msg}}')
+        </script>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>State</th>
+                <td>
+                    <select name="state">
+                        <option value="">---select---</option>
+                        {% for j in st %}
+                        <option value="{{j.id}}">{{j.Statename}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

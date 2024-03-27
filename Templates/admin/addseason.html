@@ -1,0 +1,110 @@
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#season').change(function(){
+                    var sid=$('#season').val();
+                    $.ajax({
+                    url:"{% url 'factors' %}",
+                    data:{'sn':sid},
+                    success:function(data){
+                        $('#factor').html(data)
+                        }   
+                    })
+                })
+            })
+        </script>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#country').change(function(){
+                    var cid=$('#country').val();
+                    $.ajax({
+                    url:"{% url 'getstates' %}",
+                    data:{'ci':cid},
+                    success:function(data){
+                        $('#state').html(data)
+                        }   
+                    })
+                })
+            })
+        </script>
+        <form method="post" action="{% url 'SeasonAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Season</th>
+                <td>
+                    <select name="season" id="season">
+                        <option value="">---select---</option>
+                        {% for v in sn %}
+                        <option value="{{v.id}}">{{v.Seasonname}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Factor</th>
+                <td>
+                    <select name="factor" id="factor">
+                        <option value="">---select---</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>
+                    <select name="country" id="country">
+                        <option value="">---select---</option>
+                        {% for a in co %}
+                        <option value="{{a.id}}">{{a.Countryname}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>
+                    <select name="state" id="state">
+                        <option value="">---select---</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>
+                    <select name="month" id="">
+                        <option value="">---select---</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Add"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+    </script>
+    {% endfor %}
+
+{% endif %}

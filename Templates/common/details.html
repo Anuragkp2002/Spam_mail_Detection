@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+    </head>
+    <body style="background: url('/static/00585a3568a0a7d.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="container" style="padding-top: 166px; padding-left: 330px;">
+        <form method="post" action="{% url 'detailsAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td><input type="text" name="phonenumber" class="form-control"></td>
+                <td><input type="hidden" name="username" value="{{us}}"></td>
+            </tr>
+            
+            <tr>
+                <th>Security Questions</th>
+                <td>
+                    <select name="security" class="form-control">
+                        <option value="" class="text-center">---select---</option>
+                        <option value="Name of your Favorite food"?>Name of your Favorite food?</option>
+                        <option value="Who was your Best Childhhod Friend?">Who was your Best Childhhod Friend?</option> 
+                        <option value="Your first Pet's Name?">Your first Pet's Name?</option>
+                        <option value="Favorite sports team?">Favorite sports team?</option>
+                        <option value="first Computer game you played?">first Computer game you played??</option>    
+                    </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <th>Answer</th>
+                <td><input type="text" name="answer" class="form-control"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td style="padding-top: 10px; padding-left: 118px;"><input type="submit" value="Next" class="btn btn-outline-success"></td>
+            </tr>
+        </table>
+        </form>
+        </div> 
+    </body>
+</html>

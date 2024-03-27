@@ -1,0 +1,42 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'viewreceivedmessageAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Sendername</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Subject</th>
+                <th>Message</th>
+                
+            </tr>
+            {% for v in rw %}
+            <tr>
+                <td>{{v.Senderid.Username}}</td>
+                <td>{{v.Date}}</td>
+                <td>{{v.Time}}</td>
+                <td>{{v.Subject}}</td>
+                <td>{{v.Message}}</td>
+                <td><input type="checkbox" name="checkbox" value="{{v.id}}"></td>
+                <td><a href="{% url 'forward' v.id %}">Forward</a></td>
+                <td><a href="{% url 'reply' v.id %}">Reply</a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Move to Trash"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

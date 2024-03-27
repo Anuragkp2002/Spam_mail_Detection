@@ -1,0 +1,41 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'viewcontactAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Remark</th>
+            </tr>
+            {% for v in ct %}
+            <tr>
+                <td>{{v.Contactid.Username}}</td>
+                <td>{{v.Name}}</td>
+                <td>{{v.Date}}</td>
+                <td>{{v.Time}}</td>
+                <td>{{v.Remarks}}</td>
+                <td><input type="checkbox" name="checkbox" value="{{v.id}}"></td>
+                <td><a href="{% url 'contactdelete' v.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Move to Blocklist"></td>
+            </tr>
+        </table>
+        </form>    
+    </body>
+</html>
+
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+    </script>
+    {% endfor %}
+
+{% endif %}

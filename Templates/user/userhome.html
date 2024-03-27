@@ -1,0 +1,41 @@
+Welcome User
+
+<li><a href="{% url 'sendmessage' %}">SendMessage</a></li>
+<li><a href="{% url 'viewsendmessage' %}">ViewSendMessage</a></li>
+<li><a href="{% url 'viewreceivedmessage' %}">Received Message</a></li>
+<li><a href="{% url 'viewtrash' %}">View Trash</a></li>
+<li><a href="{% url 'addcontact' %}">Add Contact</a></li>
+<li><a href="{% url 'blocklist' %}">Create Blocklist</a></li>
+<li><a href="{% url 'viewcontact' %}">View Contact</a></li>
+<li><a href="{% url 'viewblocklist' %}">View Blocklist</a></li>
+<li><a href="{% url 'addcustomerhobby' %}">Add Customer Hobby</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

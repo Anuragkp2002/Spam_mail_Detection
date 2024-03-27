@@ -1,0 +1,53 @@
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"> </script>
+        <script>
+            $(document).ready(function(){
+                $("#receiver").change(function(){
+                    var username=$("#receiver").val();
+                    $.ajax({
+                        url:"{% url 'existing' %}",
+                        data:{'user':username},
+                        success:(function(data){
+                            if(data.valid!="exist")
+                                {
+                                 alert("Username does not exist")
+                                 $("#reciever").val('');
+                                }
+                        })
+                    })
+
+                })
+            })   
+            </script>
+        <form method="post" action="{% url 'sendmessageAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>ReceiverName</th>
+                <td><input type="text" name="receiver" id="receiver"></td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td><input type="text" name="subject"></td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td><textarea name="messages" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Send"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

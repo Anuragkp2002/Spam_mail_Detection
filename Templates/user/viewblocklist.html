@@ -1,0 +1,32 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Remark</th>
+            </tr>
+            {% for v in bk %}
+            <tr>
+                <td>{{v.Contactid.Username}}</td>
+                <td>{{v.Name}}</td>
+                <td>{{v.Date}}</td>
+                <td>{{v.Time}}</td>
+                <td>{{v.Remark}}</td>
+                <td><a href="{% url 'deleteblocklist' v.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+    </script>
+    {% endfor %}
+
+{% endif %}

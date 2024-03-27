@@ -1,0 +1,55 @@
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#reciever").change(function(){
+                    var reciever=$('#reciever').val();
+                    $.ajax({
+                        url:"{% url 'recieverexist' %}",
+                            data:{'rcv':reciever},
+                            success:function(data){
+                                if(data.valid!="exist")
+                                    {
+                                     alert("Username does not exist")
+                                     $("#reciever").val('');
+                                    }
+                            }
+                    })   
+                })
+            })
+        </script>
+        <form method="post" action="{% url 'forwardAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Receivername</th>
+                <td><input type="text" name="receivername" id="reciever"></td>
+            </tr>
+            {% for v in fw %}
+            <tr>
+                <th>Subject</th>
+                <td><input type="text" name="subject" value="{{v.Subject}}"></td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td><textarea name="message" id="" cols="30" rows="10">{{v.Message}}</textarea></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Forward"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

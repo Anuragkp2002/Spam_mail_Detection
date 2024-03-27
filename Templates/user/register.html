@@ -1,0 +1,110 @@
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#country').change(function(){
+                    var cid=$('#country').val();
+                    $.ajax({
+                    url:"{% url 'state' %}",
+                    data:{'co':cid},
+                    success:function(data){
+                        $('#state').html(data)
+                        }   
+                    })
+                })
+            })
+        </script>
+        <form method="post" action="{% url 'registrationAction' %}">
+            {% csrf_token %}
+        <table>   
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td><input type="radio" name="gender" value="male">Male
+                <input type="radio" name="gender" value="female">Female</td>
+            </tr>
+            <tr>
+                <th>DOB</th>
+                <td><input type="date" name="dob"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name="address" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>
+                    <select name="country" id="country">
+                        <option value="">---select---</option>
+                        {% for v in cy %}
+                        <option value="{{v.id}}">{{v.Countryname}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                    <th>State</th>
+                    <td>
+                        <select name="state" id="state">
+                            <option value="">---select---</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td><input type="text" name="phonenumber"></td>
+            </tr>
+            
+            <tr>
+                <th>Hobbies</th>
+                {% for v in hb %}
+                <td><input type="checkbox" name="checkbox" value="{{v.id}}">{{v.Hobbyname}}</td>
+                {% endfor %}
+
+            </tr>
+            <tr>
+                <th>SecurityQuestion</th>
+                <td>
+                    <select name="security">
+                        <option value="">---select---</option>
+                        <option value="Name of your Favorite food"?>Name of your Favorite food?</option>
+                        <option value="Who was your Best Childhhod Friend?">Who was your Best Childhhod Friend?</option> 
+                        <option value="Your first Pet's Name?">Your first Pet's Name?</option>
+                        <option value="Favorite sports team?">Favorite sports team?</option>
+                        <option value="first Computer game you played?">Name of your Favorite food?</option>    
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Answer</th>
+                <td><input type="text" name="answer"></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Register"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+    </head>
+    <body style="background: url('/static/00585a3568a0a7d.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="container" style="padding-top: 250px; padding-left: 370px;">
+        <table>
+            <tr>
+                <th>Sendername</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Message</th>
+                <th>Subject</th>
+            </tr>
+            {% for v in sp %}
+            <tr>
+                <td>{{v.Senderid.Username}}</td>
+                <td>{{v.Date}}</td>
+                <td>{{v.Time}}</td>
+                <td>{{v.Message}}</td>
+                <td>{{v.Subject}}</td>
+                <td><a href="{% url 'deletespam' v.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <tabe>
+            <tr>
+                <th>Factor</th>
+                <td>
+                    <select name="factor">
+                        <option value="">---select---</option>
+                        {% for v in fact %}
+                        <option value="{{v.id}}">{{v.Factorname}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </tabe>
+    </body>
+</html>

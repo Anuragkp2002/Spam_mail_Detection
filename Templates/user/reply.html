@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'replyAction' %}">
+            {% csrf_token %}
+        <table>
+            {% for v in ry %}
+            <tr>
+                <th>Receivername</th>
+                <td><input type="text" name="name" value="{{v.Senderid.Username}}"></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th>Subject</th>
+                <td><input type="text" name="subject"></td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td><textarea name="message" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Send"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

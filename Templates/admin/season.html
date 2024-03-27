@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'addseasonAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Season</th>
+                <td><input type="text" name="season"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Add"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

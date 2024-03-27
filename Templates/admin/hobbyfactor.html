@@ -1,0 +1,38 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'hobbyfactorAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Hobby</th>
+                <td>
+                    <select name="hobby">
+                        <option value="">---select---</option>
+                        {% for v in hb %}
+                        <option value="{{v.id}}">{{v.Hobbyname}}</option>
+
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Factor</th>
+                <td><input type="text" name="factor"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Add"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}
